@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AutoTrack v2 · BUCENG-CSC</title>
+<meta name="description" content="Check your BUCENG-CSC council fee and see where every peso of the council fund goes.">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#1C1B1F">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/BigShoulders-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/BricolageGrotesque-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/autotrack.css">
+<script src="js/config.js" defer></script>
+<script src="js/app.js" defer></script>
+</head>
+<body>
+<div class="felt" aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="app">
+  <header class="topbar">
+    <span class="org">BUCENG-CSC · A.Y. <span data-ay></span></span>
+    <a class="brand" href="#/">AUTOTRACK <b>V2</b></a>
+    <nav class="topnav" aria-label="Main">
+      <a href="#/" data-route="home">Home</a>
+      <a href="#/fee" data-route="fee">My fee</a>
+      <a href="#/fund" data-route="fund">Fund</a>
+      <a href="#/receipts" data-route="receipts">Receipts</a>
+    </nav>
+    <span class="fresh" id="fresh" role="status">Loading…</span>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- ============================================================ HOME -->
+    <section class="view view--home" data-view="home" aria-labelledby="home-h">
+      <div class="home-hero">
+        <span class="cutout" aria-hidden="true"></span>
+        <h1 id="home-h"><span class="w1 scrap scrap--lime">AUTO</span><span class="w2 shadow-pink"><span class="scrap scrap--b scrap--cream">TRACK</span></span><span class="sr"> v2</span></h1>
+        <span class="v2" aria-hidden="true">V2</span>
+        <span class="sticker st-star" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M50 3 L62 35 L97 37 L69 58 L80 95 L50 73 L19 93 L31 57 L3 36 L38 34 Z"/></svg></span>
+        <p>Check your fee. See where every peso goes.</p>
+      </div>
+
+      <div class="stack">
+        <a class="card c-lime card--fee" href="#/fee">
+          <span class="nt sk1 is-l"></span><span class="nt sk2 is-l"></span>
+          <span class="row"><span class="lead"><span class="ico-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4z"/></svg></span>Check my fee</span>
+            <span class="sub">A.Y. fee <b class="fig fig--s" id="h-fee">₱243</b></span></span>
+          <span class="row row--end">
+            <span class="sub">Student No. + last name.<br>Paid or not, in seconds.</span>
+            <span class="btn btn--ink">Check status <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </span>
+        </a>
+
+        <a class="card c-cobalt" href="#/fund">
+          <span class="nt bp1 is-l"></span><span class="nt bp2 is-l"></span><span class="nt sk1 is-r"></span><span class="nt sk2 is-r"></span>
+          <span class="row"><h2>Cash on hand</h2><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span></span>
+          <span class="row row--end"><span class="sub" id="h-fund-sub">Council fund</span><span class="fig fig--l" id="h-fund">—</span></span>
+        </a>
+
+        <a class="card c-raised" href="#/fund">
+          <span class="nt bp1 is-r"></span><span class="nt bp2 is-r"></span><span class="nt sk1 is-l"></span><span class="nt sk2 is-l"></span>
+          <span class="row"><h2>Students who've paid</h2><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span></span>
+          <span class="bar" aria-hidden="true"><i id="h-paid-bar"></i></span>
+          <span class="row row--end"><span class="sub num" id="h-paid-sub">Counting…</span><span class="fig fig--m" id="h-paid">—</span></span>
+        </a>
+
+        <a class="card c-cream" href="#/receipts">
+          <span class="nt bp1 is-l"></span><span class="nt bp2 is-l"></span>
+          <span class="row"><h2>Liquidation reports</h2><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span></span>
+          <span class="row row--end"><span class="sub" id="h-rep-sub">Receipts for council spending</span><span class="fig fig--l" id="h-rep">—</span></span>
+        </a>
+      </div>
+
+      <div class="notice" id="home-err" hidden>
+        <p>We couldn't load the council records just now.</p>
+        <button class="btn btn--lime" type="button" data-retry>Try again</button>
+      </div>
+
+      <a class="banner" id="banner" hidden>
+        <span class="txt"><span class="tagscrap" id="banner-tag">Update</span><span class="ttl" id="banner-title"></span></span>
+        <span class="go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <ul class="uplist" id="uplist" aria-label="More updates" hidden></ul>
+
+      <p class="foot">From BUCENG-CSC payment and financial records. We never show names or full Student Nos. Questions? <a class="js-contact" href="#/fee">Email the council</a>.</p>
+    </section>
+
+    <!-- ============================================================ MY FEE -->
+    <section class="view" data-view="fee" aria-labelledby="fee-h" hidden>
+      <div id="fee-form-view">
+        <h1 class="scraphead scraphead--fee" id="fee-h"><span class="s1 scrap scrap--pink">BAYAD</span><span class="s2 shadow-lime"><span class="scrap scrap--b scrap--cream">KA NA?</span></span></h1>
+        <div class="two">
+          <form class="card c-cream form" id="lookup" novalidate>
+            <h2>Find your record</h2>
+            <label for="sid">Student No.</label>
+            <input id="sid" name="sid" inputmode="numeric" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="20" placeholder="2026-01-12345" aria-describedby="sid-help">
+            <span class="help" id="sid-help">Format: 2026-01-12345. Dashes are added for you.</span>
+            <label for="lname">Last name</label>
+            <input id="lname" name="lname" autocomplete="family-name" spellcheck="false" maxlength="60" placeholder="Dela Cruz" aria-describedby="lname-help">
+            <span class="help" id="lname-help"></span>
+            <button class="btn btn--ink btn--big" type="submit" id="lookup-btn"><span id="lookup-label">Check payment status</span></button>
+            <p class="formerr" id="lookup-err" role="alert" hidden></p>
+            <span class="privacy">Both must match. We only say paid or not paid. Never your name or full Student No.</span>
+          </form>
+          <section class="card c-raised ledger" aria-labelledby="fee-lines-h">
+            <div class="row"><h2 id="fee-lines-h">What's in your fee</h2><span class="fig fig--s" id="fee-total">₱243</span></div>
+            <div id="fee-lines"></div>
+          </section>
+        </div>
+      </div>
+
+      <div id="fee-result-view" hidden>
+        <div class="two">
+          <div class="col">
+            <section class="card verdict" id="verdict" role="status" aria-live="polite">
+              <div class="row"><span class="pill" id="v-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path id="v-icon" d=""/></svg><span id="v-pill-txt"></span></span><span class="sub" id="v-ay"></span></div>
+              <h1 id="v-title" tabindex="-1"></h1>
+              <p id="v-sub"></p>
+            </section>
+            <div class="passwrap" id="passwrap">
+              <div class="tilt">
+                <svg class="pass" id="pass" viewBox="0 0 360 228" role="img" aria-labelledby="pass-t">
+                  <title id="pass-t">Fee pass</title>
+                  <defs><clipPath id="passclip"><rect width="360" height="228" rx="18"/></clipPath></defs>
+                  <g clip-path="url(#passclip)">
+                    <rect class="pass__body" width="360" height="228"/>
+                    <g class="pass__stripes">
+                      <path class="s1" d="M0 114 H290 A46 46 0 0 1 336 160 V240"/>
+                      <path class="s2" d="M0 121 H290 A39 39 0 0 1 329 160 V240"/>
+                      <path class="s3" d="M0 128 H290 A32 32 0 0 1 322 160 V240"/>
+                      <path class="s4" d="M0 135 H290 A25 25 0 0 1 315 160 V240"/>
+                      <path class="s5" d="M0 142 H290 A18 18 0 0 1 308 160 V240"/>
+                      <path class="s6" d="M0 149 H290 A11 11 0 0 1 301 160 V240"/>
+                    </g>
+                    <rect class="pass__mag" y="160" width="360" height="40"/>
+                  </g>
+                  <rect class="pass__edge" x="1" y="1" width="358" height="226" rx="17"/>
+                  <text class="pass__org" x="18" y="27">BUCENG-CSC</text>
+                  <text class="pass__word" x="14" y="80">autotrack</text>
+                  <text class="pass__sub" x="18" y="104" id="pass-sub">council fee pass</text>
+                  <g transform="rotate(-12 278 56)">
+                    <circle class="pass__stampbg" cx="278" cy="56" r="40"/>
+                    <circle class="pass__stamp" cx="278" cy="56" r="40" fill="none" stroke-width="3"/>
+                    <text class="pass__stampword" x="278" y="61" text-anchor="middle" id="pass-stamp">PAID</text>
+                    <text class="pass__stampsub" x="278" y="77" text-anchor="middle" id="pass-stampsub"></text>
+                  </g>
+                  <text class="pass__id" x="18" y="186" id="pass-id"></text>
+                  <text class="pass__tail" x="342" y="185" text-anchor="end" id="pass-tail"></text>
+                  <text class="pass__fine" x="18" y="219" id="pass-fine">SHOW THIS AT CSC EVENTS</text>
+                </svg>
+              </div>
+              <span class="sticker st-star" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M50 3 L62 35 L97 37 L69 58 L80 95 L50 73 L19 93 L31 57 L3 36 L38 34 Z"/></svg></span>
+              <span class="sticker st-spark-lilac" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M50 0 C53 35 65 47 100 50 C65 53 53 65 50 100 C47 65 35 53 0 50 C35 47 47 35 50 0 Z"/></svg></span>
+            </div>
+          </div>
+          <div class="col">
+            <section class="card c-cream ledger" aria-label="Details">
+              <div id="r-rows"></div>
+              <a class="helplink js-contact" id="r-help" href="#/fee" hidden><span id="r-help-txt"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </section>
+            <div class="actions">
+              <button class="btn btn--ghost" type="button" id="again">Check another</button>
+              <a class="btn btn--cobalt" href="#/fund">Where fees go <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="foot">Lookups are limited to protect privacy: a few tries per Student No. every 10 minutes. Questions? <a class="js-contact" href="#/fee">Email the council</a>.</p>
+    </section>
+
+    <!-- ============================================================ FUND -->
+    <section class="view" data-view="fund" aria-labelledby="fund-h" hidden>
+      <h1 class="scraphead scraphead--fund" id="fund-h"><span class="s1 scrap scrap--lime">FOLLOW</span><span class="s2 shadow-pink"><span class="scrap scrap--b scrap--cream">THE PESO</span></span></h1>
+      <p class="loading" data-loading>Loading the council records…</p>
+      <div class="notice" data-error hidden><p>We couldn't load the council records just now.</p><button class="btn btn--lime" type="button" data-retry>Try again</button></div>
+
+      <div data-body hidden>
+        <div class="sechead"><h2>Money the council holds</h2><p id="f-period">From the latest Financial Report</p></div>
+        <div class="two">
+          <section class="card c-cobalt hero-cash" aria-labelledby="cash-h">
+            <h3 id="cash-h">Cash on hand</h3>
+            <span class="fig fig--xl" id="f-ending">—</span>
+            <span class="sub">What's left in the fund after this semester's spending.</span>
+            <div class="inset">
+              <div class="split" aria-hidden="true"><i class="a" id="f-split-a"></i><i class="b" id="f-split-b"></i></div>
+              <div class="row sub"><span class="key key--out" id="f-out-k">Spent</span><span class="num" id="f-out-v">—</span></div>
+              <div class="row sub"><span class="key key--left" id="f-left-k">Left</span><span class="num" id="f-left-v">—</span></div>
+            </div>
+          </section>
+          <section class="card c-cream ledger" aria-labelledby="tally-h">
+            <h3 id="tally-h">How we got there</h3>
+            <div class="li"><span>Beginning balance</span><span id="t-begin">—</span></div>
+            <div class="li"><span>+ Cash in</span><span id="t-in">—</span></div>
+            <div class="li"><span>− Cash out</span><span id="t-out">—</span></div>
+            <div class="li li--total"><span>= Cash on hand</span><span id="t-left">—</span></div>
+            <p class="sub" id="t-remit" hidden></p>
+            <a class="trace" href="#/receipts"><span><b id="trace-h">Cash out with receipts</b><span id="trace-sub"></span></span><span class="btn btn--ink-cream">See receipts <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          </section>
+        </div>
+
+        <div class="sechead"><h2>Fees collected from students</h2><p id="c-cap">Who has paid the council fee, from the fee list</p></div>
+        <div class="two">
+          <section class="card c-raised depts" aria-labelledby="paid-h">
+            <div class="row row--end"><h3 id="paid-h">Students who've paid</h3><span class="fig fig--l" id="c-pct">—</span></div>
+            <span class="bar bar--thick" aria-hidden="true"><i id="c-bar"></i></span>
+            <div class="trio"><div><span>Paid</span><b id="c-paid">—</b></div><div><span>Not yet</span><b id="c-left">—</b></div><div><span>Students</span><b id="c-total">—</b></div></div>
+            <h4>By department</h4>
+            <div id="c-depts"></div>
+          </section>
+          <section class="card c-raised trend" aria-labelledby="trend-h">
+            <h3 id="trend-h">Paid count over time</h3>
+            <svg viewBox="0 0 320 90" preserveAspectRatio="none" id="trend-svg" role="img" aria-label="Share of students paid over time">
+              <path class="ghost" id="trend-ghost" d="M4 60 q 12 -18 24 0 t 24 0 t 24 0 t 24 0 t 24 0 t 24 0 t 24 0 t 24 0 t 24 0 t 24 0 t 24 0 t 24 0 t 24 0"/>
+              <path class="line" id="trend-line" d=""/>
+            </svg>
+            <div class="axis" id="trend-axis" hidden><span id="trend-x0"></span><span id="trend-x1"></span></div>
+            <p class="sub" id="trend-note">This line starts filling after the first nightly count, one point a day.</p>
+          </section>
+        </div>
+      </div>
+      <p class="foot" id="fund-foot">From the BUCENG-CSC Financial Report and fee list.</p>
+    </section>
+
+    <!-- ============================================================ RECEIPTS -->
+    <section class="view" data-view="receipts" aria-labelledby="rec-h" hidden>
+      <h1 class="scraphead scraphead--receipts" id="rec-h"><span class="s1 scrap scrap--pink">RECEIPTS,</span><span class="s2 shadow-lime"><span class="scrap scrap--b scrap--cream">NOT VIBES.</span></span><span class="sr"> Liquidation reports</span></h1>
+      <p class="loading" data-loading>Loading the reports…</p>
+      <div class="notice" data-error hidden><p>We couldn't load the reports just now.</p><button class="btn btn--lime" type="button" data-retry>Try again</button></div>
+
+      <div data-body hidden>
+        <section class="card c-raised" aria-labelledby="recon-h">
+          <h2 id="recon-h">Cash out with receipts</h2>
+          <div class="row row--end"><span class="fig fig--m" id="r-backed">—</span><span class="sub num" id="r-of"></span></div>
+          <span class="bar" aria-hidden="true"><i id="r-bar"></i></span>
+          <p class="sub" id="r-rest"></p>
+        </section>
+        <div class="filters" role="group" aria-label="Filter reports by status" id="filters"></div>
+        <p class="sub muted" id="r-hint">One stack per month, newest first. Tap a tab to pull that folder forward.</p>
+        <div class="months" id="months"></div>
+        <div class="notice" id="r-empty" hidden><p id="r-empty-txt">No liquidation reports are published yet.</p><button class="btn btn--lime" type="button" id="r-reset" hidden>Show all reports</button></div>
+      </div>
+      <p class="foot">Only reports the treasurer has published appear here. Drafts stay private.</p>
+    </section>
+
+    <!-- ============================================================ REPORT DETAIL -->
+    <section class="view" data-view="report" aria-labelledby="rep-title" hidden>
+      <div class="backrow"><a class="backbtn" href="#/receipts" aria-label="Back to all reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a><span>Liquidation report</span></div>
+      <p class="loading" data-loading>Loading the report…</p>
+      <div class="notice" data-error hidden><p>We couldn't load this report.</p><button class="btn btn--lime" type="button" data-retry>Try again</button></div>
+      <div class="notice" id="rep-missing" hidden><p>That report isn't published, or the link is old.</p><a class="btn btn--lime" href="#/receipts">See all reports</a></div>
+
+      <div data-body hidden>
+        <div class="two">
+          <div class="col">
+            <section class="cover" id="rep-cover">
+              <span class="folder__tab" id="rep-month"></span>
+              <span class="folder__blur" aria-hidden="true"><span id="rep-blur"></span></span>
+              <span class="clip" aria-hidden="true"></span>
+              <div class="folder__body">
+                <span class="pill" id="rep-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path id="rep-icon" d=""/></svg><span id="rep-status"></span></span>
+                <h1 id="rep-title" tabindex="-1"></h1>
+                <p id="rep-desc"></p>
+              </div>
+            </section>
+            <section class="card c-raised" aria-labelledby="steps-h">
+              <h2 id="steps-h">Where this report is</h2>
+              <ol class="steps" id="rep-steps"><li>Submitted</li><li>Under review</li><li>Approved</li></ol>
+              <p class="sub" id="rep-roles"></p>
+            </section>
+            <section class="card c-cream ledger" aria-label="Totals" id="rep-figs"></section>
+          </div>
+          <div class="col">
+            <section class="card c-paper sheet" aria-labelledby="lines-h">
+              <h2 id="lines-h">Receipts</h2>
+              <div class="receipts" id="rep-lines"></div>
+              <p class="sub" id="rep-lines-note" hidden></p>
+            </section>
+            <a class="btn btn--lime btn--big" id="rep-pdf" target="_blank" rel="noopener noreferrer" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z M14 3v5h5"/></svg>View signed report (PDF)</a>
+            <p class="pdfnote" id="rep-pdf-note"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<nav class="tabbar" aria-label="Main">
+  <a href="#/" data-route="home"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"/></svg></span>Home</a>
+  <a href="#/fee" data-route="fee"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4z"/></svg></span>My fee</a>
+  <a href="#/fund" data-route="fund"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z M3 10h18 M16 14.5h2"/></svg></span>Fund</a>
+  <a href="#/receipts" data-route="receipts"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>Receipts</a>
+</nav>
+
+<!-- templates: filled with textContent only -->
+<template id="tpl-li"><div class="li"><span class="k"></span><span class="v"></span></div></template>
+<template id="tpl-dept"><div class="dept"><span class="n"></span><span class="bar" aria-hidden="true"><i></i></span><span class="p"><b></b> <span></span></span></div></template>
+<template id="tpl-update"><li><time></time><span><a></a><span class="b"></span></span></li></template>
+<template id="tpl-month">
+  <section class="month"><div class="month__head"><h2><span class="mn"></span> <small class="yr"></small></h2><span class="sum"></span></div><div class="folders"></div></section>
+</template>
+<template id="tpl-folder-back"><div class="folder"><button class="folder__tab" type="button" aria-pressed="false"></button></div></template>
+<template id="tpl-folder-front">
+  <div class="folder">
+    <span class="folder__tab"></span>
+    <span class="folder__blur" aria-hidden="true"><span></span></span>
+    <span class="clip" aria-hidden="true"></span>
+    <div class="folder__body">
+      <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d=""/></svg><span class="st"></span></span>
+      <h3></h3>
+      <p></p>
+      <div class="folder__foot"><span><span class="lbl">Cash out</span><span class="amt"></span></span><a class="btn btn--ink-cream">Open report <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+  </div>
+</template>
+</body>
+</html>
